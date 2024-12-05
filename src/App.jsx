@@ -4,6 +4,8 @@ import Home from "./pages/Home"
 import Books from "./pages/Books"
 import Temp from "./pages/Temp"
 import QuillEditor from "./component/QuillEditor"
+import Navbar from "./component/Navbar"
+import SearchFilter from "./component/SearchFilter"
 
 const router = createBrowserRouter([
   {
@@ -19,8 +21,18 @@ const router = createBrowserRouter([
     element: <QuillEditor />,
   },
   {
-    path: "/temp",
-    element: <Temp />,
+    path: "/navbar",
+    element: <Navbar />,
+    children: [
+      {
+        path: "edit",
+        element: <QuillEditor />,
+      },
+    ],
+  },
+  {
+    path: "/search",
+    element: <SearchFilter />,
   },
 ])
 

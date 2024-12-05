@@ -53,7 +53,7 @@ const Editor = forwardRef(
           },
         },
         theme: "bubble",
-        placeholder: "Start your note....",
+        placeholder: "Get started typing...",
       })
 
       ref.current = quill

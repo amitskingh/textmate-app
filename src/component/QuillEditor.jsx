@@ -94,32 +94,12 @@ function QuillEditor() {
         className={`${styles["editor-container"]} form-container`}
         onSubmit={handleSubmit}
       >
-        <div>
-          <input
-            type="text"
-            id="title"
-            ref={noteTitleElement}
-            placeholder="Note Name"
-          ></input>
-        </div>
-
         <Editor
           ref={quillRef}
           readOnly={readOnly}
           onSelectionChange={setRange}
           onTextChange={setLastChange}
         />
-        <div className="controls">
-          <button className="btn btn-outline-primary">Save</button>
-          <label>
-            Read Only:{" "}
-            <input
-              type="checkbox"
-              value={readOnly}
-              onChange={(e) => setReadOnly(e.target.checked)}
-            />
-          </label>
-        </div>
       </form>
     </center>
   )
