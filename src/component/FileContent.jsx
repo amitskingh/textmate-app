@@ -10,7 +10,7 @@ export default function FileContent({
 }) {
   return (
     <>
-      <div className=" my-3 mx-2 px-2 flex items-center pb-1">
+      <div className="border-b-2 border-b-gray-300 border-dashed my-3 mx-2 px-2 flex items-center pb-2">
         <div>
           <Icon className="text-amber-500 size-12 mr-2" />
         </div>

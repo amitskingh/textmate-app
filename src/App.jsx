@@ -8,6 +8,7 @@ import QuillEditor from "./component/QuillEditor"
 import NavbarChild from "./Layouts/NavbarChild"
 import Login from "./pages/Login"
 import Registeration from "./pages/Registration"
+import NotFound from "./component/NotFound"
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <Temp />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ])
 

@@ -8,62 +8,78 @@ import {
 
 function Home() {
   return (
-    <div className="lg:flex-row lg:justify-between lg:gap-0 flex flex-col gap-10">
-      <div className="lg:m-7 md:m-6 sm:m-5 m-4 ">
-        <h1 className="lg:text-6xl md:text-5xl md:my-3  my-2 text-3xl font-bold">
-          Welcome to TextMate
+    <div className=" lg:flex-row lg:justify-between lg:gap-0 flex flex-col gap-10">
+      <div className="lg:m-7 md:m-6 sm:m-5 m-4">
+        {/* Main Heading */}
+        <h1 className="animate-typing lg:text-6xl md:text-5xl md:my-3 my-2 text-3xl font-extrabold bg-gradient-to-r from-rose-500 from-20% via-blue-600 via-50% to-orange-500 bg-clip-text text-transparent drop-shadow-md">
+          Welcome to <span className="italic">TextMate</span>
         </h1>
-        <h3 className="lg:text-4xl md:text-3xl md:my-3 sm:text-2xl uppercase my-2 text-xl text-slate-600 border-b-2 border-slate-400">
+
+        {/* Subheading */}
+        <h3 className="lg:text-4xl md:text-3xl md:my-3 sm:text-2xl uppercase my-2 text-xl text-slate-700 font-semibold tracking-wide">
           Revolutionize your note-taking.
         </h3>
 
-        <h2 className="md:text-4xl md:mt-5 sm:text-3xl text-2xl text-slate-600 mt-4">
-          TextMate helps you capture, organize, and access your ideas
+        {/* Description */}
+        <h2 className="text-pretty md:text-4xl md:mt-5 sm:text-3xl text-2xl text-slate-600 mt-4 leading-relaxed">
+          TextMate helps you{" "}
+          <span className="text-rose-500 font-bold">capture</span>,{" "}
+          <span className="text-rose-500 font-bold">organize</span>, and{" "}
+          <span className="text-rose-500 font-bold">access your ideas</span>{" "}
           effortlessly.
         </h2>
-        <ul className="mb-4 mt-1">
-          <h3 className="md:text-3xl md:mt-2 sm:text-2xl sm:mb-1 text-xl mt-1 mb-0.5">
+
+        {/* Features List */}
+        <ul className="mb-4 mt-2 space-y-2">
+          <h3 className="md:text-3xl md:mt-3 sm:text-2xl sm:mb-2 text-xl mt-1 mb-0.5 font-bold underline text-gray-800">
             Features
           </h3>
-          <li>
-            <ViewfinderCircleIcon className="lg:size-8 lg:mr-2 md:size-6 size-4 inline-block mr-1" />
-            <span className="lg:text-2xl md:text-xl font-semibold">
+          <li className="flex items-center">
+            <ViewfinderCircleIcon className="lg:w-8 lg:h-8 text-blue-500 mr-2 md:w-6 md:h-6 w-5 h-5" />
+            <span className="lg:text-2xl md:text-xl font-medium">
               Capture what matters.
             </span>
           </li>
-          <li>
-            <RectangleStackIcon className="lg:size-8 lg:mr-2 md:size-6 size-4 inline-block mr-1" />
-            <span className="lg:text-2xl md:text-xl font-semibold">
+          <li className="flex items-center">
+            <RectangleStackIcon className="lg:w-8 lg:h-8 text-blue-500 mr-2 md:w-6 md:h-6 w-5 h-5" />
+            <span className="lg:text-2xl md:text-xl font-medium">
               Organize with ease.
             </span>
           </li>
-          <li>
-            <PencilSquareIcon className="lg:size-8 lg:mr-2 md:size-6 size-4 inline-block mr-1" />
-            <span className="lg:text-2xl md:text-xl font-semibold">
+          <li className="flex items-center">
+            <PencilSquareIcon className="lg:w-8 lg:h-8 text-blue-500 mr-2 md:w-6 md:h-6 w-5 h-5" />
+            <span className="lg:text-2xl md:text-xl font-medium">
               Access instantly.
             </span>
           </li>
-          <li>
-            <MagnifyingGlassIcon className="lg:size-8 lg:mr-2 md:size-6 size-4 inline-block mr-1" />
-            <span className="lg:text-2xl md:text-xl font-semibold">
+          <li className="flex items-center">
+            <MagnifyingGlassIcon className="lg:w-8 lg:h-8 text-blue-500 mr-2 md:w-6 md:h-6 w-5 h-5" />
+            <span className="lg:text-2xl md:text-xl font-medium">
               Search Notes.
             </span>
           </li>
         </ul>
-        <h2 className="lg:text-4xl md:text-3xl md:my-5 md:mb-4 text-2xl my-2 mb-3">
+
+        {/* Call-to-Action */}
+        <h2 className="text-pretty lg:text-4xl text-gray-700 md:text-3xl md:my-5 text-2xl my-2 mb-4 leading-snug">
           Get started today and transform the way you take notes!
         </h2>
         <div className="flex">
-          <button className="md:px-4 md:text-xl bg-zinc-950 hover:bg-zinc-800 text-white px-2 py-1 rounded mr-2 shadow">
-            <Link to="/register">Sign Up</Link>
-          </button>
-          <button className="md:px-4 md:text-xl ring-1 ring-black hover:bg-black hover:text-white py-1 px-2 text-slate-800 rounded">
-            <Link to="/login">Get Started</Link>
+          <button className="md:px-4 md:text-xl bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white py-2 px-4 rounded shadow-md transform transition-transform duration-200 hover:scale-105">
+            <Link to="/login" className="block">
+              Get Started
+            </Link>
           </button>
         </div>
       </div>
+
+      {/* Image Section */}
       <div className="lg:h-screen lg:py-8 lg:-z-10">
-        <img className="lg:bg-cover w-full md:h-full" src="notes.jpeg" alt="" />
+        <img
+          className="lg:rounded-full w-full md:h-full shadow-lg transform hover:scale-105 transition-transform duration-300"
+          src="notes.jpeg"
+          alt="Notes illustration"
+        />
       </div>
     </div>
   )
