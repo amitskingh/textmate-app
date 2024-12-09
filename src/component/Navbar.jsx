@@ -18,7 +18,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import SearchFilter from "./SearchFilter"
-import Books from "../pages/Books"
+import Books from "../pages/Library"
 import QuillEditor from "./QuillEditor"
 
 const navigation = [
@@ -44,9 +44,9 @@ export default function Navbar() {
     <>
       <div className="relative">
         <nav className="sticky top-0 z-40 flex justify-center">
-          <div className="md:w-[768px] relative w-full px-4 flex justify-between items-center h-12 bg-white rounded border-b-4 border-gray-100">
+          <div className="md:w-[768px] relative w-full py-8 px-4 flex justify-between items-center h-12 bg-white rounded border-b-4 border-gray-100">
             <div className="flex items-center sm:w-1/2 w-2/3">
-              <div className="flex hover:text-black text-gray-500 items-center h-7 w-full px-2 hover:cursor-pointer ring-1   ring-gray-500 rounded-xl">
+              <div className="flex hover:text-black text-gray-500 items-center h-8 w-full px-2 hover:cursor-pointer ring-1   ring-gray-500 rounded-xl">
                 Search...
               </div>
             </div>
@@ -69,10 +69,10 @@ export default function Navbar() {
                   }
                   `}
               >
-                <ul className="">
+                <ul>
                   <div className="flex justify-between items-center ring-1 ring-red-500">
                     <a href="#">
-                      <li className="py-1 px-4 hover:text-purple-600">
+                      <li className="py-2 px-4 hover:text-purple-600">
                         <UserCircleIcon className="size-6 text-purple-600 inline-flex mr-1" />
                         Your Profile
                       </li>
@@ -85,13 +85,13 @@ export default function Navbar() {
                     </div>
                   </div>
                   <a href="#">
-                    <li className="py-1 px-4 hover:text-purple-600">
+                    <li className="py-2 px-4 hover:text-purple-600">
                       <Cog6ToothIcon className="size-6 text-purple-600 inline-block mr-1" />
                       Setting
                     </li>
                   </a>
                   <a href="#">
-                    <li className="py-1 px-4 hover:text-purple-600">
+                    <li className="py-2 px-4 hover:text-purple-600">
                       <ArrowRightStartOnRectangleIcon className="size-6 text-purple-600 inline-block mr-1" />
                       Sign Out
                     </li>
@@ -102,9 +102,6 @@ export default function Navbar() {
             {/* <div className="absolute top-10 left-0 min bg-black rounded-lg mx-4 w-full h-96"></div> */}
           </div>
         </nav>
-        <div className="shadow-lg mt-10 ring-1 min-h-screen mx-auto max-w-[768px]">
-          <QuillEditor />
-        </div>
       </div>
       {/* <Books /> */}
     </>

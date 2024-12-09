@@ -2,9 +2,9 @@ import { Link } from "react-router-dom"
 import { BsThreeDotsVertical, BsJournalRichtext } from "react-icons/bs"
 import { useState } from "react"
 import { ContextMenu } from "../component/ContextMenu"
-import { PlusIcon } from "@heroicons/react/24/outline"
+import { PlusIcon, FunnelIcon } from "@heroicons/react/24/outline"
 
-export default function Books() {
+export default function Library() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [bottomBorder, setBottomBorder] = useState(false)
 
@@ -29,24 +29,14 @@ export default function Books() {
         ></div>
       )}
 
-      <div className="flex flex-col max-w-[768px] mx-auto">
-        <div className="m-2">
-          <div className="flex">
-            <input
-              className="w-full"
-              type="text"
-              placeholder="Search library or notes..."
-            ></input>
-            <label>Search </label>
-          </div>
-        </div>
-        <div className="mx-5 flex justify-between bg-white ">
-          <div className="p-2 px-2 border-collapse shadow shadow-slate-400 text-gray-800 rounded-lg hover:cursor-pointer">
-            <span>Create New</span>
-            <PlusIcon className="size-5 ml-1  rounded inline-block" />
+      <div className="mt-4 flex flex-col max-w-[768px] mx-auto">
+        <div className="mx-5 mt-4 mb-7 pb-6 border-b-2 flex gap-6 items-center bg-white ">
+          <div className="p-2 px-2 border-collapse shadow cursor-pointer shadow-slate-400 text-gray-800 rounded-lg hover:cursor-pointer">
+            <span>New One</span>
+            <PlusIcon className="size-5 ml-2 inline-block" />
           </div>
           <div className="p-2 px-2 border-collapse shadow shadow-slate-400 text-gray-800 rounded-lg hover:cursor-pointer">
-            Welcome
+            <FunnelIcon className="size-5 mr-1 inline-block" /> Filters
           </div>
         </div>
         <div

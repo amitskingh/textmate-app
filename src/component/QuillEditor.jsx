@@ -6,7 +6,6 @@ import styles from "./QuillEditor.module.css"
 import "quill/dist/quill.snow.css"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
-import { getHeaders } from "./TokenManagement"
 
 const BACKEND_URL = import.meta.env.VITE_API_URL
 

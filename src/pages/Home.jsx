@@ -58,7 +58,7 @@ function Home() {
             <Link to="/register">Sign Up</Link>
           </button>
           <button className="md:px-4 md:text-xl ring-1 ring-black hover:bg-black hover:text-white py-1 px-2 text-slate-800 rounded">
-            <Link to="/books">Get Started</Link>
+            <Link to="/login">Get Started</Link>
           </button>
         </div>
       </div>

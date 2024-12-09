@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./App.css"
 import Home from "./pages/Home"
-import Books from "./pages/Books"
-import Temp from "./pages/Temp"
+import Library from "./pages/Library"
+import Notes from "./pages/Notes"
 import QuillEditor from "./component/QuillEditor"
-import Navbar from "./component/Navbar"
-import SearchFilter from "./component/SearchFilter"
+import NavbarChild from "./Layouts/NavbarChild"
+import Login from "./pages/Login"
+import Registeration from "./pages/Registration"
 
 const router = createBrowserRouter([
   {
@@ -13,26 +14,26 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/books",
-    element: <Books />,
+    path: "/register",
+    element: <Registeration />,
   },
   {
-    path: "/edit",
-    element: <QuillEditor />,
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "/navbar",
-    element: <Navbar />,
+    path: "/library",
+    element: <NavbarChild />,
     children: [
       {
-        path: "edit",
-        element: <QuillEditor />,
+        index: true,
+        element: <Library />,
+      },
+      {
+        path: ":librarySlug/notes",
+        element: <Notes />,
       },
     ],
-  },
-  {
-    path: "/search",
-    element: <SearchFilter />,
   },
 ])
 
