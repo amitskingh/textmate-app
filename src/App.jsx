@@ -3,6 +3,7 @@ import "./App.css"
 import Home from "./pages/Home"
 import Library from "./pages/Library"
 import Notes from "./pages/Notes"
+import Temp from "./pages/Temp"
 import QuillEditor from "./component/QuillEditor"
 import NavbarChild from "./Layouts/NavbarChild"
 import Login from "./pages/Login"
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: ":librarySlug/notes",
         element: <Notes />,
+      },
+      {
+        path: "temp",
+        element: <Temp />,
       },
     ],
   },

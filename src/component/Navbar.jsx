@@ -46,7 +46,7 @@ export default function Navbar() {
         <nav className="sticky top-0 z-40 flex justify-center">
           <div className="md:w-[768px] relative w-full py-8 px-4 flex justify-between items-center h-12 bg-white rounded border-b-4 border-gray-100">
             <div className="flex items-center sm:w-1/2 w-2/3">
-              <div className="flex hover:text-black text-gray-500 items-center h-8 w-full px-2 hover:cursor-pointer ring-1   ring-gray-500 rounded-xl">
+              <div className="flex hover:text-black text-gray-500 items-center h-8 w-full px-2 hover:cursor-pointer ring-1   ring-gray-300 rounded-xl">
                 Search...
               </div>
             </div>
@@ -72,27 +72,27 @@ export default function Navbar() {
                 <ul>
                   <div className="flex justify-between items-center ring-1 ring-red-500">
                     <a href="#">
-                      <li className="py-2 px-4 hover:text-purple-600">
-                        <UserCircleIcon className="size-6 text-purple-600 inline-flex mr-1" />
+                      <li className="py-2 px-4 hover:text-blue-500">
+                        <UserCircleIcon className="size-6 text-blue-500 inline-flex mr-1" />
                         Your Profile
                       </li>
                     </a>
                     <div className="flex justify-center items-center mr-2.5">
                       <XMarkIcon
                         onClick={handleMenuClick}
-                        className="cursor-pointer hover:text-purple-600 size-6 "
+                        className="cursor-pointer hover:text-blue-500 size-6 "
                       />
                     </div>
                   </div>
                   <a href="#">
-                    <li className="py-2 px-4 hover:text-purple-600">
-                      <Cog6ToothIcon className="size-6 text-purple-600 inline-block mr-1" />
+                    <li className="py-2 px-4 hover:text-blue-500">
+                      <Cog6ToothIcon className="size-6 text-blue-500 inline-block mr-1" />
                       Setting
                     </li>
                   </a>
                   <a href="#">
-                    <li className="py-2 px-4 hover:text-purple-600">
-                      <ArrowRightStartOnRectangleIcon className="size-6 text-purple-600 inline-block mr-1" />
+                    <li className="py-2 px-4 hover:text-blue-500">
+                      <ArrowRightStartOnRectangleIcon className="size-6 text-blue-500 inline-block mr-1" />
                       Sign Out
                     </li>
                   </a>

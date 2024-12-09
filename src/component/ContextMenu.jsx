@@ -1,9 +1,5 @@
 import { CgRename } from "react-icons/cg"
-import {
-  FolderOpenIcon,
-  TrashIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline"
+import { FolderOpenIcon, TrashIcon } from "@heroicons/react/24/outline"
 
 export function ContextMenu({ handleMenuClick }) {
   return (
