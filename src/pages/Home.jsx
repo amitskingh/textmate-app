@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom"
 import {
-  ViewfinderCircleIcon,
-  RectangleStackIcon,
-  PencilSquareIcon,
   MagnifyingGlassIcon,
+  PencilSquareIcon,
+  RectangleStackIcon,
+  ViewfinderCircleIcon,
 } from "@heroicons/react/16/solid"
+import { Link } from "react-router-dom"
 
 function Home() {
   return (

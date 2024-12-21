@@ -1,7 +1,7 @@
+import { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useRef} from "react"
-import { registerThunk } from "../features/auth/authThunk"
 import LoadingSmall from "../component/LoadingSmall"
+import { registerThunk } from "../features/auth/authThunk"
 
 export default function Registration() {
   const dispatch = useDispatch()

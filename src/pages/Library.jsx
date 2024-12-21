@@ -1,38 +1,32 @@
-import { BsJournalRichtext } from "react-icons/bs"
-import { PlusIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
-import FileContent from "../component/FileContent"
+import { useCallback, useEffect, useState } from "react"
+import { IoCreateOutline } from "react-icons/io5"
+import { useDispatch, useSelector } from "react-redux"
+import { useSearchParams } from "react-router-dom"
+import ErrorMessage from "../component/ErrorMessage"
+import FilterMenu from "../component/FilterMenu"
+import LibraryList from "../component/LibraryList"
+import Modal from "../component/Modal"
+import Pagination from "../component/Pagination"
+import { setCurrentPage } from "../features/library/librarySlice"
 import {
   addLibraryThunk,
   deleteLibraryThunk,
   fetchLibraryThunk,
   renameLibraryThunk,
 } from "../features/library/libraryThunk"
-import { useSelector, useDispatch } from "react-redux"
-import { act, useCallback, useEffect, useState } from "react"
-import Modal from "../component/Modal"
-import Pagination from "../component/Pagination"
-import FilterMenu from "../component/FilterMenu"
-import Filter from "./Temp"
-import { IoCreateOutline } from "react-icons/io5"
-import { useParams, useSearchParams } from "react-router-dom"
-import LoadingLarge from "../component/LoadingLarge"
-import ErrorMessage from "../component/ErrorMessage"
-import LibraryList from "../component/LibraryList"
-import {
-  setCurrentPage,
-  setFilter,
-  removeFilter,
-} from "../features/library/librarySlice"
+
+import { useFilters } from "../hooks/useFilter"
 
 import { toast } from "react-toastify"
-// import "react-toastify/dist/ReactToastify.css"
 
 import debounce from "lodash/debounce"
 
 export default function Library() {
-  const { libraries, status, pagination, filters } = useSelector(
+  const { libraries, status, pagination } = useSelector(
     (state) => state.library
   )
+
+  const { filters, updateFilter, resetFilter } = useFilters()
 
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -45,23 +39,18 @@ export default function Library() {
   )
 
   useEffect(() => {
-    console.log(searchParams)
-
     debouncedFetch() // This will only run when debouncedFetch is actually recreated
+
     return () => debouncedFetch.cancel()
   }, [debouncedFetch])
 
-  const updateFilter = (key, value) => {
-    dispatch(setFilter({ key, value }))
-  }
-
-  const resetFilter = () => {
-    dispatch(removeFilter())
-  }
-
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page))
-    setSearchParams((prev) => ({ ...prev, page }))
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams)
+      newParams.set("page", page)
+      return newParams
+    })
   }
 
   // handle the action info for the modal

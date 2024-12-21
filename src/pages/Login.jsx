@@ -16,10 +16,10 @@
 */
 
 import { useRef } from "react"
-import LoadingSmall from "../component/LoadingSmall"
 import { useDispatch, useSelector } from "react-redux"
-import { loginThunk } from "../features/auth/authThunk"
 import { useNavigate } from "react-router-dom"
+import LoadingSmall from "../component/LoadingSmall"
+import { loginThunk } from "../features/auth/authThunk"
 
 export default function Login() {
   const navigate = useNavigate()

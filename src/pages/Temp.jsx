@@ -84,3 +84,15 @@ export default function Filter() {
     </>
   )
 }
+
+/*
+
+
+    const cleanFilters = debounce(() => {
+      dispatch(removeFilter())
+    }, 300)
+
+    cleanFilters.cancel()
+
+
+*/

@@ -1,14 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./App.css"
+import NotFound from "./component/NotFound"
+import NavbarChild from "./Layouts/NavbarChild"
 import Home from "./pages/Home"
 import Library from "./pages/Library"
-import Notes from "./pages/Notes"
-import Temp from "./pages/Temp"
-import QuillEditor from "./component/QuillEditor"
-import NavbarChild from "./Layouts/NavbarChild"
 import Login from "./pages/Login"
+import Notes from "./pages/Notes"
 import Registeration from "./pages/Registration"
-import NotFound from "./component/NotFound"
+import Temp from "./pages/Temp"
 
 import { ToastContainer } from "react-toastify"
 

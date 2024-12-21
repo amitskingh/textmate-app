@@ -1,8 +1,5 @@
+import { FunnelIcon, PlusIcon } from "@heroicons/react/24/outline"
 import { FaRegNoteSticky } from "react-icons/fa6"
-import { Link } from "react-router-dom"
-import { CgRename } from "react-icons/cg"
-import { Button } from "@headlessui/react"
-import { PlusIcon, FunnelIcon, TrashIcon } from "@heroicons/react/24/outline"
 import FileContent from "../component/FileContent"
 
 export default function Library() {

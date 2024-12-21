@@ -21,8 +21,8 @@ const initialState = {
     totalItems: 0,
   },
   filters: {
-    nameOrder: "",
-    dateType: "",
+    nameOrder: null,
+    dateType: null,
   },
 }
 
@@ -49,9 +49,10 @@ const librarySlice = createSlice({
     },
     removeFilter: (state, action) => {
       state.filters = {
-        nameOrder: "",
-        dateType: "",
+        nameOrder: null,
+        dateType: null,
       }
+      state.pagination.currentPage = 1
     },
   },
   extraReducers: (builder) => {

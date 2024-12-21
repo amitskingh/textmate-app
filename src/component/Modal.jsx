@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from "react"
-import LoadingSmall from "./LoadingSmall"
+import { useEffect, useState } from "react"
 import { validateFilename } from "../utils/validation"
+import LoadingSmall from "./LoadingSmall"
 
 export const ActionTypes = {
   NEW: "NEW",

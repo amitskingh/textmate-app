@@ -50,7 +50,7 @@ const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
                   type="radio"
                   name="nameOrder"
                   value="ascending"
-                  onClick={(e) => handleFilter(e)}
+                  onChange={(e) => handleFilter(e)}
                   checked={currFilter.nameOrder === "ascending"}
                 ></input>{" "}
                 Ascending
@@ -61,7 +61,7 @@ const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
                   type="radio"
                   name="nameOrder"
                   value="descending"
-                  onClick={(e) => handleFilter(e)}
+                  onChange={(e) => handleFilter(e)}
                   checked={currFilter.nameOrder === "descending"}
                 ></input>{" "}
                 Descending
@@ -75,7 +75,7 @@ const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
                   type="radio"
                   name="dateType"
                   value="old"
-                  onClick={(e) => handleFilter(e)}
+                  onChange={(e) => handleFilter(e)}
                   checked={currFilter.dateType === "old"}
                 ></input>{" "}
                 Old
@@ -86,7 +86,7 @@ const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
                   type="radio"
                   name="dateType"
                   value="recent"
-                  onClick={(e) => handleFilter(e)}
+                  onChange={(e) => handleFilter(e)}
                   checked={currFilter.dateType === "recent"}
                 ></input>{" "}
                 Recent
