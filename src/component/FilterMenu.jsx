@@ -1,7 +1,6 @@
-import { FunnelIcon, XCircleIcon } from "@heroicons/react/24/outline"
+import { FunnelIcon } from "@heroicons/react/24/outline"
 import { memo, useState } from "react"
 import { IoRefreshSharp } from "react-icons/io5"
-import { useSearchParams } from "react-router-dom"
 
 const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

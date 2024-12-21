@@ -26,7 +26,7 @@ export default function Library() {
     (state) => state.library
   )
 
-  const { filters, updateFilter, resetFilter } = useFilters()
+  const { filters, updateFilter, resetFilter } = useFilters("library")
 
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -54,7 +54,12 @@ export default function Library() {
   }
 
   // handle the action info for the modal
-  const [ModalInfo, setModalInfo] = useState({})
+  const [ModalInfo, setModalInfo] = useState({
+    action: null,
+    heading: "",
+    payload: { fileName: "", fileSlug: "", placeholder: "" },
+  })
+
   const handleActionInfo = (type, payload) => {
     let newModalInfo
     if (type === "NEW") {
@@ -86,36 +91,42 @@ export default function Library() {
   const handleAction = async (type, payload) => {
     try {
       let response
+      const updatedPayload = { ...payload } // Create a copy
+
       if (type === "NEW") {
-        response = await dispatch(addLibraryThunk(payload.fileName)).unwrap() // `unwrap` helps catch rejections
+        response = await dispatch(
+          addLibraryThunk(updatedPayload.fileName)
+        ).unwrap() // `unwrap` helps catch rejections
         toast.success("Library created successfully!")
       } else if (type === "RENAME") {
         response = await dispatch(
           renameLibraryThunk({
-            librarySlug: payload.fileSlug,
-            updatedLibraryName: payload.fileName,
+            librarySlug: updatedPayload.fileSlug,
+            updatedLibraryName: updatedPayload.fileName,
           })
         ).unwrap()
         toast.success("Library renamed successfully!")
       } else if (type === "DELETE") {
-        response = await dispatch(deleteLibraryThunk(payload.fileSlug)).unwrap()
+        response = await dispatch(
+          deleteLibraryThunk(updatedPayload.fileSlug)
+        ).unwrap()
         setCurrentPage(1)
         toast.success("Library deleted successfully!")
       }
 
-      console.log("Return to modal", response)
-
       return response
     } catch (ErrorMessage) {
-      console.error("Error:", ErrorMessage)
       return { error: ErrorMessage || "An error occurred" }
     }
   }
 
   // Handle the action dismissal
-  const dismissAction = (action) => {
-    console.log(action)
-    setModalInfo({})
+  const dismissAction = () => {
+    setModalInfo({
+      action: null,
+      heading: "",
+      payload: { fileName: "", fileSlug: "", placeholder: "" },
+    })
   }
 
   if (status.fetch.error) {
@@ -128,8 +139,8 @@ export default function Library() {
     <>
       <Modal
         ModalInfo={ModalInfo}
-        dismissAction={dismissAction}
         handleAction={handleAction}
+        dismissAction={dismissAction}
         status={status}
       />
 

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
-import { CgRename } from "react-icons/cg"
 import { TrashIcon } from "@heroicons/react/24/outline"
+import { CgRename } from "react-icons/cg"
+import { Link } from "react-router-dom"
 
 export default function FileContent({
   Icon,

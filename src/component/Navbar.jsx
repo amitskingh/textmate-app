@@ -1,25 +1,10 @@
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react"
-import {
-  MagnifyingGlassIcon,
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
   ArrowRightStartOnRectangleIcon,
+  Cog6ToothIcon,
+  UserCircleIcon,
+  XMarkIcon
 } from "@heroicons/react/24/outline"
 import { useState } from "react"
-import SearchFilter from "./SearchFilter"
-import Books from "../pages/Library"
-import QuillEditor from "./QuillEditor"
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },

@@ -1,31 +1,40 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setFilter, removeFilter } from "../features/library/librarySlice"
 import { useSearchParams } from "react-router-dom"
+import { removeFilter, setFilter } from "../features/library/librarySlice" // Assuming a shared slice for filters
 
-export const useFilters = () => {
+export const useFilters = (entity) => {
   const dispatch = useDispatch()
+  const filters = useSelector((state) => state[entity]?.filters || {})
   const [searchParams, setSearchParams] = useSearchParams()
-  const filters = useSelector((state) => state.library.filters)
 
+  // Update filter function
   const updateFilter = (key, value) => {
-    const updatedFilters = { ...filters, [key]: value }
+    dispatch(setFilter({ entity, key, value }))
 
-    // Dispatch Redux action
-    dispatch(setFilter({ key, value }))
-
-    // Update SearchParams
+    // Update search params in the URL
     const updatedParams = new URLSearchParams(searchParams)
-    Object.entries(updatedFilters).forEach(([key, value]) => {
-      if (value) updatedParams.set(key, value)
-      else updatedParams.delete(key)
+    Object.entries({ ...filters, [key]: value }).forEach(([key, value]) => {
+      if (value) {
+        updatedParams.set(key, value)
+      } else {
+        updatedParams.delete(key)
+      }
     })
 
     setSearchParams(updatedParams)
   }
 
+  // Reset filter function
   const resetFilter = () => {
-    dispatch(removeFilter())
-    setSearchParams({})
+    dispatch(removeFilter(entity))
+
+    // Clear search params from the URL
+    const updatedParams = new URLSearchParams(searchParams)
+    Object.keys(filters).forEach((key) => {
+      updatedParams.delete(key)
+    })
+
+    setSearchParams(updatedParams)
   }
 
   return { filters, updateFilter, resetFilter }

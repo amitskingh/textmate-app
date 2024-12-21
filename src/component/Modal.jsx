@@ -20,13 +20,7 @@ export default function Modal({
 
   const [isExiting, setIsExiting] = useState(false)
   const [warning, setWarning] = useState("")
-  const [fileName, setFileName] = useState("")
-
-  useEffect(() => {
-    if (ModalInfo.action === ActionTypes.RENAME) {
-      setFileName(ModalInfo.payload.fileName || "")
-    }
-  }, [ModalInfo])
+  const [fileName, setFileName] = useState(ModalInfo.payload.fileName)
 
   const handleDismiss = () => {
     setIsExiting(true)
@@ -36,6 +30,7 @@ export default function Modal({
   }
 
   const handleTriggerAction = async () => {
+    setWarning("") // Clear warnings before validation
     const { action, payload } = ModalInfo
     let response
 

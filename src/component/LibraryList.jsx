@@ -12,7 +12,7 @@ export default function LibraryList({ libraries, handleActionInfo, loading }) {
     return <LoadingLarge />
   }
 
-  if (!libraries.length) {
+  if (!libraries.length && !loading) {
     return (
       <p className="text-center text-gray-500">
         No libraries found, create one.
