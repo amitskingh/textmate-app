@@ -1,41 +1,57 @@
-import { FunnelIcon } from "@heroicons/react/24/outline"
-import { useState } from "react"
+import { FunnelIcon, XCircleIcon } from "@heroicons/react/24/outline"
+import { memo, useState } from "react"
 import { IoRefreshSharp } from "react-icons/io5"
+import { useSearchParams } from "react-router-dom"
 
-export default function Filter() {
+const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleClick = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const handleResetFilter = () => {
+    resetFilter()
+  }
+
+  const handleFilter = (e) => {
+    e.preventDefault()
+    console.log(e.target.name, e.target.value)
+
+    addFilter(e.target.name, e.target.value)
+  }
+
   return (
     <>
-      <div className="relative">
-        <button
-          onClick={handleClick}
-          className="p-2 px-2 border-collapse mb-3 shadow text-gray-700 bg-white ring-1 ring-gray-300 rounded-full hover:bg-gray-0"
-          aria-label="Filter Libraries"
-        >
-          <FunnelIcon className="size-5 mr-1 inline-block" /> Filters
-        </button>
+      <div className="relative z-10 ">
+        <div>
+          <button
+            onClick={handleClick}
+            className="p-1 px-2 border-collapse shadow text-black bg-white ring-1 ring-gray-300 rounded-full hover:bg-gray-100 mr-2"
+            aria-label="Filter Libraries"
+          >
+            <FunnelIcon className="size-5 mr-1 inline-block" /> Filters
+          </button>
+        </div>
 
         <div
-          className={`p-4 absolute w-64 h-50 rounded z-10 bg-white shadow ring-1 ring-gray-300 transition-all duration-200 ease-in-out transform ${
+          className={`p-4 mt-3 absolute right-0 w-64 h-50 rounded bg-white shadow-lg ring-1 ring-gray-300 transition-all duration-200 ease-in-out transform ${
             isMenuOpen
               ? "opacity-100 scale-100"
               : "opacity-0 scale-95 pointer-events-none"
           }`}
         >
-          <form>
+          <form className="z-10">
             <div className="font-semibold text-gray-800">Name</div>
             <div className="flex gap-5">
               <label className="my-2 font-semibold text-gray-800">
                 <input
                   className="size-3.5 accent-black"
                   type="radio"
-                  name="name-option"
-                  value="Ascending"
+                  name="nameOrder"
+                  value="ascending"
+                  onClick={(e) => handleFilter(e)}
+                  checked={currFilter.nameOrder === "ascending"}
                 ></input>{" "}
                 Ascending
               </label>
@@ -43,8 +59,10 @@ export default function Filter() {
                 <input
                   className="size-3.5 accent-black"
                   type="radio"
-                  name="name-option"
-                  value="Descending"
+                  name="nameOrder"
+                  value="descending"
+                  onClick={(e) => handleFilter(e)}
+                  checked={currFilter.nameOrder === "descending"}
                 ></input>{" "}
                 Descending
               </label>
@@ -55,23 +73,28 @@ export default function Filter() {
                 <input
                   className="size-3.5 accent-black"
                   type="radio"
-                  name="date-option"
-                  value="Created"
+                  name="dateType"
+                  value="old"
+                  onClick={(e) => handleFilter(e)}
+                  checked={currFilter.dateType === "old"}
                 ></input>{" "}
-                Created
+                Old
               </label>
               <label className="my-2 font-semibold text-gray-800">
                 <input
                   className="size-3.5 accent-black"
                   type="radio"
-                  name="date-option"
-                  value="Created"
+                  name="dateType"
+                  value="recent"
+                  onClick={(e) => handleFilter(e)}
+                  checked={currFilter.dateType === "recent"}
                 ></input>{" "}
-                Modified
+                Recent
               </label>
             </div>
 
             <button
+              onClick={handleResetFilter}
               type="reset"
               className="w-full mt-4 flex items-center justify-center py-1.5 rounded bg-white ring-1 ring-gray-200 text-gray-800 hover:bg-gray-50 font-semibold"
             >
@@ -83,4 +106,6 @@ export default function Filter() {
       </div>
     </>
   )
-}
+})
+
+export default FilterMenu

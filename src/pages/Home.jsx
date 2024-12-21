@@ -8,7 +8,7 @@ import {
 
 function Home() {
   return (
-    <div className=" lg:flex-row lg:justify-between lg:gap-0 flex flex-col gap-10">
+    <div className=" xl:flex-row xl:justify-between lg:gap-0 flex flex-col gap-10">
       <div className="lg:m-7 md:m-6 sm:m-5 m-4">
         {/* Main Heading */}
         <h1 className="animate-typing lg:text-6xl md:text-5xl md:my-3 my-2 text-3xl font-extrabold bg-gradient-to-r from-rose-500 from-20% via-blue-600 via-50% to-orange-500 bg-clip-text text-transparent drop-shadow-md">
@@ -74,10 +74,10 @@ function Home() {
       </div>
 
       {/* Image Section */}
-      <div className="lg:h-screen lg:py-8 lg:-z-10">
+      <div className="lg:h-screen lg:py-8">
         <img
-          className="lg:rounded-full w-full md:h-full shadow-lg transform hover:scale-105 transition-transform duration-300"
-          src="notes.jpeg"
+          className="xl:rounded-lg w-full md:h-full shadow-lg transform hover:scale-95 transition-transform duration-300"
+          src="Notes.jpeg"
           alt="Notes illustration"
         />
       </div>

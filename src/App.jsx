@@ -10,6 +10,8 @@ import Login from "./pages/Login"
 import Registeration from "./pages/Registration"
 import NotFound from "./component/NotFound"
 
+import { ToastContainer } from "react-toastify"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/temp",
+    element: <Temp />,
+  },
+  {
     path: "*",
     element: <NotFound />,
   },
@@ -50,6 +56,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <ToastContainer position="bottom-center" />
+
       <RouterProvider router={router}></RouterProvider>
     </>
   )

@@ -1,5 +1,3 @@
-import { useRef, useState } from "react"
-
 /*
   This example requires some changes to your config:
   
@@ -17,30 +15,29 @@ import { useRef, useState } from "react"
   
 */
 
+import { useRef } from "react"
 import LoadingSmall from "../component/LoadingSmall"
+import { useDispatch, useSelector } from "react-redux"
+import { loginThunk } from "../features/auth/authThunk"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
-  const [isLoading, setLoading] = useState(false)
-  const [loginFailed, setLoginFailed] = useState(false)
-  const email = useRef()
-  const password = useRef()
+  const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const dispatch = useDispatch()
+  const { loading, error } = useSelector((state) => state.auth)
+  const emailRef = useRef()
+  const passwordRef = useRef()
+
+  const handleLogin = async (e) => {
     e.preventDefault()
-    try {
-      setLoginFailed(false)
-      setLoading(true)
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
+    const res = await dispatch(loginThunk({ email, password })) //resolve the promise
+    console.log(res)
 
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos/1"
-      )
-
-      setLoading(false)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-      setLoginFailed(true)
-      setLoading(false)
+    if (res.type === "auth/login/fulfilled") {
+      navigate("/library")
     }
   }
 
@@ -59,7 +56,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="login-email"
@@ -69,7 +66,7 @@ export default function Login() {
               </label>
               <div className="mt-2">
                 <input
-                  ref={email}
+                  ref={emailRef}
                   id="login-email"
                   name="email"
                   type="email"
@@ -99,7 +96,7 @@ export default function Login() {
               </div>
               <div className="mt-2">
                 <input
-                  ref={password}
+                  ref={passwordRef}
                   id="login-password"
                   name="password"
                   type="password"
@@ -111,17 +108,24 @@ export default function Login() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
-              >
-                {isLoading ? <LoadingSmall /> : "Sign In"}
-              </button>
+              {loading ? (
+                <div className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 leading-6 text-white shadow-sm hover:bg-stone-900">
+                  <LoadingSmall
+                    backgroundColor={"bg-transparent"}
+                    borderColor={"border-white"}
+                  />
+                </div>
+              ) : (
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                >
+                  Sign In
+                </button>
+              )}
             </div>
-            {loginFailed && (
-              <div className="justify-self-center text-red-500">
-                Something went wrong, try again
-              </div>
+            {error && (
+              <div className="justify-self-center text-red-500">{error}</div>
             )}
           </form>
 

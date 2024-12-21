@@ -1,25 +1,43 @@
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useRef} from "react"
+import { registerThunk } from "../features/auth/authThunk"
+import LoadingSmall from "../component/LoadingSmall"
 
 export default function Registration() {
-  const [isLoading, setLoading] = useState(false)
-  const [loginFailed, setLoginFailed] = useState(false)
+  const dispatch = useDispatch()
+  const { loading, error } = useSelector((state) => state.auth)
+
+  const emailRef = useRef()
+  const nameRef = useRef()
+  const passwordRef = useRef()
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    const name = nameRef.current.value
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
+      const res = dispatch(registerThunk({ name, email, password }))
+      if (res.type === "auth/register/fulfilled") {
+        navigate("/library")
+      }
+  }
 
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-              className="mx-auto h-10 w-auto"
-              src="Textmate.png"
-              alt="Your Company"
-            />
+            className="mx-auto h-10 w-auto"
+            src="Textmate.png"
+            alt="Your Company"
+          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleRegister}>
             <div>
               <label
                 htmlFor="register-name"
@@ -29,6 +47,7 @@ export default function Registration() {
               </label>
               <div className="mt-2">
                 <input
+                  ref={nameRef}
                   id="register-name"
                   name="name"
                   type="text"
@@ -48,6 +67,7 @@ export default function Registration() {
               </label>
               <div className="mt-2">
                 <input
+                  ref={emailRef}
                   id="register-email"
                   name="email"
                   type="email"
@@ -67,6 +87,7 @@ export default function Registration() {
               </label>
               <div className="mt-2">
                 <input
+                  ref={passwordRef}
                   id="register-password"
                   name="password"
                   type="password"
@@ -82,10 +103,14 @@ export default function Registration() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-stone-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
               >
-                {isLoading ? <LoadingSmall /> : "Sign Up"}
+                {loading ? <LoadingSmall /> : "Sign Up"}
               </button>
             </div>
           </form>
+
+          {error && (
+            <div className="flex justify-center mt-2 text-red-600">{error}</div>
+          )}
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Already a member?{" "}

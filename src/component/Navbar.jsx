@@ -72,7 +72,7 @@ export default function Navbar() {
                 <ul>
                   <div className="flex justify-between items-center ring-1 ring-red-500">
                     <a href="#">
-                      <li className="py-2 px-4 hover:text-blue-500">
+                      <li className="font-semibold text-gray-800 py-2 px-4 hover:text-blue-500">
                         <UserCircleIcon className="size-6 text-blue-500 inline-flex mr-1" />
                         Your Profile
                       </li>
@@ -85,13 +85,13 @@ export default function Navbar() {
                     </div>
                   </div>
                   <a href="#">
-                    <li className="py-2 px-4 hover:text-blue-500">
+                    <li className="font-semibold text-gray-800 py-2 px-4 hover:text-blue-500">
                       <Cog6ToothIcon className="size-6 text-blue-500 inline-block mr-1" />
                       Setting
                     </li>
                   </a>
                   <a href="#">
-                    <li className="py-2 px-4 hover:text-blue-500">
+                    <li className="font-semibold text-gray-800 py-2 px-4 hover:text-blue-500">
                       <ArrowRightStartOnRectangleIcon className="size-6 text-blue-500 inline-block mr-1" />
                       Sign Out
                     </li>

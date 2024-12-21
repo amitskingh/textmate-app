@@ -7,6 +7,8 @@ export default function FileContent({
   FileName,
   DateCreated,
   TotalItems,
+  handleActionInfo,
+  FileSlug,
 }) {
   return (
     <>
@@ -17,7 +19,7 @@ export default function FileContent({
         <div className="w-full flex justify-between">
           <div className="relative flex flex-col flex-wrap  sm:max-w-96 max-w-32">
             <Link className="max-w-full text-slate-600">
-              <p className="truncate hover:border-b-2 hover:border-b-blue-500 border-b-2">
+              <p className="truncate hover:border-b-2 hover:border-b-blue-600 border-b-2">
                 {FileName}
               </p>
             </Link>
@@ -30,11 +32,15 @@ export default function FileContent({
             </div>
           </div>
           <div className="flex gap-2 items-center">
-            <button>
-              <CgRename className="size-6 hover:text-blue-500" />
+            <button
+              onClick={() => handleActionInfo("RENAME", { FileName, FileSlug })}
+            >
+              <CgRename className="size-6 text-gray-700 hover:text-blue-600" />
             </button>
-            <button>
-              <TrashIcon className="size-6 hover:text-red-500" />
+            <button
+              onClick={() => handleActionInfo("DELETE", { FileName, FileSlug })}
+            >
+              <TrashIcon className="size-6 text-gray-700 hover:text-rose-600" />
             </button>
           </div>
         </div>
