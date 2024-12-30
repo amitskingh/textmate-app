@@ -10,6 +10,9 @@ import Registeration from "./pages/Registration"
 import Temp from "./pages/Temp"
 
 import { ToastContainer } from "react-toastify"
+import QuillEditor from "./component/QuillEditor"
+import Editor from "quill/core/editor"
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 const router = createBrowserRouter([
   {
@@ -26,25 +29,37 @@ const router = createBrowserRouter([
   },
   {
     path: "/library",
-    element: <NavbarChild />,
+    element: (
+      <ProtectedRoute>
+        <NavbarChild />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <Library />,
+        element: (
+          <ProtectedRoute>
+            <Library />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: ":librarySlug/notes",
-        element: <Notes />,
-      },
-      {
-        path: "temp",
-        element: <Temp />,
+        path: ":librarySlug/note",
+        element: (
+          <ProtectedRoute>
+            <Notes />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
-    path: "/temp",
-    element: <Temp />,
+    path: "/library/:librarySlug/note/:noteSlug",
+    element: (
+      <ProtectedRoute>
+        <QuillEditor />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "*",

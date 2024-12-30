@@ -9,6 +9,7 @@ export default function FileContent({
   TotalItems,
   handleActionInfo,
   FileSlug,
+  isLibrary,
 }) {
   return (
     <>
@@ -18,17 +19,26 @@ export default function FileContent({
         </div>
         <div className="w-full flex justify-between">
           <div className="relative flex flex-col flex-wrap  sm:max-w-96 max-w-32">
-            <Link className="max-w-full text-slate-600">
+            <Link
+              to={isLibrary ? `/library/${FileSlug}/note` : `${FileSlug}`}
+              className="max-w-full text-slate-600"
+            >
               <p className="truncate hover:border-b-2 hover:border-b-blue-600 border-b-2">
                 {FileName}
               </p>
             </Link>
             <div className="flex gap-2 items-end">
               <p className="text-xs font-light cursor-default">{DateCreated}</p>
-              <p className="text-xs font-light cursor-default">|</p>
-              <p className="text-xs font-light cursor-default">
-                {TotalItems} items
-              </p>
+
+              {isLibrary && (
+                <p className="text-xs font-light cursor-default">|</p>
+              )}
+
+              {isLibrary && (
+                <p className="text-xs font-light cursor-default">
+                  {TotalItems} items
+                </p>
+              )}
             </div>
           </div>
           <div className="flex gap-2 items-center">

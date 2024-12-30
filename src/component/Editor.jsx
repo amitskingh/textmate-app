@@ -41,7 +41,7 @@ const Editor = forwardRef(
 
         [{ color: [] }, { background: [] }], // dropdown with defaults from theme
         [{ align: [] }],
-
+        ["code-block"],
         ["clean"], // remove formatting button
       ]
 
@@ -52,7 +52,7 @@ const Editor = forwardRef(
             hljs,
           },
         },
-        theme: "bubble",
+        theme: "snow",
         placeholder: "Get started typing...",
       })
 

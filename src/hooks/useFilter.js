@@ -1,27 +1,24 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
-import { removeFilter, setFilter } from "../features/library/librarySlice" // Assuming a shared slice for filters
 
-export const useFilters = (entity) => {
+export const useFilters = (entity, removeFilter, setFilter) => {
   const dispatch = useDispatch()
   const filters = useSelector((state) => state[entity]?.filters || {})
   const [searchParams, setSearchParams] = useSearchParams()
 
   // Update filter function
   const updateFilter = (key, value) => {
-    dispatch(setFilter({ entity, key, value }))
+    dispatch(setFilter({ key, value }))
 
-    // Update search params in the URL
-    const updatedParams = new URLSearchParams(searchParams)
-    Object.entries({ ...filters, [key]: value }).forEach(([key, value]) => {
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams)
       if (value) {
-        updatedParams.set(key, value)
+        newParams.set(key, value)
       } else {
-        updatedParams.delete(key)
+        newParams.delete(key)
       }
+      return newParams
     })
-
-    setSearchParams(updatedParams)
   }
 
   // Reset filter function

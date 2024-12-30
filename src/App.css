@@ -1,49 +1,55 @@
-/* Increase font size for the editor content */
+/* Make toolbar fixed at the top */
+.ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 40; /* Ensure it stays above other elements */
+  background-color: #f9fafb; /* Set a background for clarity */
+}
+
+/* Editor content styles */
 .ql-editor {
+  max-width: 768px;
   font-size: 18px; /* Increase text size inside the editor */
   line-height: 1.6; /* Adjust line height for better readability */
 }
 
-/* Increase font size of the toolbar buttons */
-.ql-toolbar {
-  font-size: 20px; /* Make toolbar buttons larger */
+div.ql-toolbar {
+  padding-top: 2rem !important;
+  padding-bottom: 1.5rem !important;
+  border: 2px solid #d1d5db !important;
+  /* border-top: none !important; */
+  /* border-radius: 2pc; */
 }
 
-/* Increase font size for bold, italic, and other icons in the toolbar */
+div.ql-container {
+  border: 2px solid #d1d5db !important;
+  border-top: none !important;
+  min-height: 100vh;
+}
+
+/* Optional: Style toolbar buttons and icons */
 .ql-toolbar .ql-formats {
   font-size: 18px; /* Larger font size for toolbar icons */
 }
 
-/* Increase size of the toolbar icons specifically */
 .ql-toolbar .ql-picker {
-  font-size: 18px; /* Make dropdowns in the toolbar larger */
+  font-size: 18px; /* Larger dropdowns in the toolbar */
 }
 
-.ql-toolbar .ql-picker-item {
-  font-size: 18px; /* Make each dropdown item text larger */
-}
-
-.ql-toolbar .ql-stroke {
-  width: 2px; /* Increase the width of the icons */
-  height: 2px; /* Increase the height of the icons */
-}
-
-/* Increase font size for the placeholder text */
+/* Style placeholder text */
 .ql-editor.ql-blank::before {
   font-size: 18px; /* Increase placeholder text size */
 }
 
-/* Customize font size for the code blocks (syntax highlighting) */
+/* Customize font size for code blocks */
 .ql-syntax {
   font-size: 16px; /* Make code block text larger */
 }
 
-/* Optional: Increase size of the link button */
-.ql-toolbar .ql-link {
-  font-size: 18px; /* Make the link button in the toolbar larger */
+.ql-code-block-container .ql-ui {
+  color: black;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-/* body {
-  background-color: #fff1f2;
-  background-color: #111827;
-} */

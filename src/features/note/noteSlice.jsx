@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import {
-  fetchLibraryThunk,
-  addLibraryThunk,
-  deleteLibraryThunk,
-  renameLibraryThunk,
-} from "./libraryThunk"
+  fetchNoteThunk,
+  addNoteThunk,
+  deleteNoteThunk,
+  renameNoteThunk,
+} from "./noteThunk"
 
 const initialState = {
-  libraries: [],
+  notes: [],
   status: {
     fetch: { loading: false, error: null },
     add: { loading: false, error: null },
@@ -27,21 +27,12 @@ const initialState = {
 }
 
 // Slice
-const librarySlice = createSlice({
-  name: "library",
+const noteSlice = createSlice({
+  name: "note",
   initialState,
   reducers: {
     setFilters: (state, action) => {
-      // Create a new state object based on the existing one
-      return {
-        ...state,
-        // Update specific properties
-        filters: action.payload.filters,
-        pagination: {
-          ...state.pagination, // Copy the existing pagination object
-          currentPage: action.payload.page,
-        },
-      }
+      state.filters = { ...action.payload }
     },
     clearError: (state, action) => {
       const { actionType } = action.payload
@@ -50,15 +41,12 @@ const librarySlice = createSlice({
       }
     },
     setCurrentPage: (state, action) => {
-      if (action.payload != state.pagination.currentPage) {
-        state.pagination.currentPage = action.payload
-        console.log(state.pagination.currentPage)
-      }
+      state.pagination.currentPage = action.payload
+      console.log(state.pagination)
     },
     setFilter: (state, action) => {
       const { key, value } = action.payload
       state.filters[key] = value
-      console.log(key, value)
     },
     removeFilter: (state, action) => {
       state.filters = {
@@ -68,73 +56,74 @@ const librarySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Fetch Library
+    // Fetch Note
     builder
-      .addCase(fetchLibraryThunk.pending, (state) => {
+      .addCase(fetchNoteThunk.pending, (state) => {
         state.status.fetch.loading = true
         state.status.fetch.error = null
       })
-      .addCase(fetchLibraryThunk.fulfilled, (state, action) => {
+      .addCase(fetchNoteThunk.fulfilled, (state, action) => {
         state.status.fetch.loading = false
-        state.libraries = action.payload.data
+        state.notes = action.payload.data
         state.pagination = action.payload.meta.pagination
+        console.log("NOTE PAGINATION: ", action.payload.meta.pagination)
       })
-      .addCase(fetchLibraryThunk.rejected, (state, action) => {
+      .addCase(fetchNoteThunk.rejected, (state, action) => {
         state.status.fetch.loading = false
         state.status.fetch.error = action.payload
       })
 
-    // Add Library
+    // Add Note
     builder
-      .addCase(addLibraryThunk.pending, (state) => {
+      .addCase(addNoteThunk.pending, (state) => {
         state.status.add.loading = true
         state.status.add.error = null
       })
-      .addCase(addLibraryThunk.fulfilled, (state, action) => {
+      .addCase(addNoteThunk.fulfilled, (state, action) => {
         state.status.add.loading = false
-        state.libraries.unshift(action.payload.data)
-        if (state.libraries.length > 10) {
-          state.libraries.pop()
+        state.notes.unshift(action.payload.data)
+        if (state.notes.length > 10) {
+          state.notes.pop()
         }
       })
-      .addCase(addLibraryThunk.rejected, (state, action) => {
+      .addCase(addNoteThunk.rejected, (state, action) => {
         state.status.add.loading = false
         state.status.add.error = action.payload
       })
 
-    // Rename Library
+    // Rename Note
     builder
-      .addCase(renameLibraryThunk.pending, (state) => {
+      .addCase(renameNoteThunk.pending, (state) => {
         state.status.rename.loading = true
         state.status.rename.error = null
       })
-      .addCase(renameLibraryThunk.fulfilled, (state, action) => {
+      .addCase(renameNoteThunk.fulfilled, (state, action) => {
         state.status.rename.loading = false
-        const index = state.libraries.findIndex(
-          (lib) => lib._id === action.payload.data._id
+        const index = state.notes.findIndex(
+          (note) => note._id === action.payload.data._id
         )
         if (index !== -1) {
-          state.libraries[index] = action.payload.data
+          state.notes[index] = action.payload.data
         }
       })
-      .addCase(renameLibraryThunk.rejected, (state, action) => {
+      .addCase(renameNoteThunk.rejected, (state, action) => {
         state.status.rename.loading = false
         state.status.rename.error = action.payload
       })
 
-    // Delete Library
+    // Delete Note
     builder
-      .addCase(deleteLibraryThunk.pending, (state) => {
+      .addCase(deleteNoteThunk.pending, (state) => {
         state.status.delete.loading = true
         state.status.delete.error = null
       })
-      .addCase(deleteLibraryThunk.fulfilled, (state, action) => {
+      .addCase(deleteNoteThunk.fulfilled, (state, action) => {
         state.status.delete.loading = false
-        state.libraries = state.libraries.filter(
-          (lib) => lib._id !== action.payload.data._id
+        state.notes = state.notes.filter(
+          (note) => note._id !== action.payload.data._id
         )
       })
-      .addCase(deleteLibraryThunk.rejected, (state, action) => {
+      .addCase(deleteNoteThunk.rejected, (state, action) => {
         state.status.delete.loading = false
         state.status.delete.error = action.payload
       })
@@ -147,5 +136,5 @@ export const {
   setCurrentPage,
   setFilter,
   removeFilter,
-} = librarySlice.actions
-export const libraryReducer = librarySlice.reducer
+} = noteSlice.actions
+export const noteReducer = noteSlice.reducer

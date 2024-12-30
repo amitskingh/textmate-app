@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from "react"
 import { IoCreateOutline } from "react-icons/io5"
 import { useDispatch, useSelector } from "react-redux"
-import { useSearchParams } from "react-router-dom"
+import { useFetcher, useParams, useSearchParams } from "react-router-dom"
 import ErrorMessage from "../component/ErrorMessage"
 import FilterMenu from "../component/FilterMenu"
 import LibraryList from "../component/LibraryList"
 import Modal from "../component/Modal"
 import Pagination from "../component/Pagination"
-import { setCurrentPage } from "../features/library/librarySlice"
+import {
+  setCurrentPage,
+  removeFilter,
+  setFilter,
+  setFilters,
+} from "../features/library/librarySlice"
 import {
   addLibraryThunk,
   deleteLibraryThunk,
@@ -25,24 +30,51 @@ export default function Library() {
   const { libraries, status, pagination } = useSelector(
     (state) => state.library
   )
-
-  const { filters, updateFilter, resetFilter } = useFilters("library")
-
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
 
+  const { filters, updateFilter, resetFilter } = useFilters(
+    "library",
+    removeFilter,
+    setFilter
+  )
+
+  const fetchLibraries = useCallback(
+    (page, currentFilters) => {
+      dispatch(fetchLibraryThunk({ page, ...currentFilters }))
+    },
+    [dispatch]
+  )
+
   const debouncedFetch = useCallback(
-    debounce(() => {
-      dispatch(fetchLibraryThunk({ page: pagination.currentPage, ...filters }))
-    }, 300),
-    [dispatch, pagination.currentPage, filters]
+    debounce(fetchLibraries, 300),
+    [fetchLibraries] // Only depend on the stable callback
   )
 
   useEffect(() => {
-    debouncedFetch() // This will only run when debouncedFetch is actually recreated
+    const pageFromURL = parseInt(searchParams.get("page") || 1, 10)
+    const nameOrderFromURL = searchParams.get("nameOrder")
+    const dateTypeFromURL = searchParams.get("dateType")
+
+    // Dispatch actions to initialize Redux state *before* fetching data
+    dispatch(setCurrentPage(pageFromURL))
+    if (nameOrderFromURL) {
+      dispatch(setFilter({ key: "nameOrder", value: nameOrderFromURL }))
+    }
+    if (dateTypeFromURL) {
+      dispatch(setFilter({ key: "dateType", value: dateTypeFromURL }))
+    }
+
+    // Now fetch the data (using the possibly updated state)
+    const currentFilters = {
+      nameOrder: nameOrderFromURL,
+      dateType: dateTypeFromURL,
+    }
+
+    debouncedFetch(pageFromURL, currentFilters)
 
     return () => debouncedFetch.cancel()
-  }, [debouncedFetch])
+  }, [dispatch, debouncedFetch, searchParams]) // Depend on searchParams
 
   const handlePageChange = (page) => {
     dispatch(setCurrentPage(page))
@@ -146,7 +178,7 @@ export default function Library() {
 
       <div className="flext justify-center max-w-[768px] mx-auto">
         {/* Header Buttons */}
-        <div className="mt-4 flex justify-between items-center  px-5 mb-4 py-4 border-b-2  ring-1">
+        <div className="mt-4 flex justify-between items-center  px-5 mb-4 py-4 border-b-2">
           <button
             onClick={() => handleActionInfo("NEW")}
             className="flex items-center p-2 px-2 border-collapse shadow text-white bg-green-600 rounded-lg hover:bg-green-700"

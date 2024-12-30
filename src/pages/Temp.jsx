@@ -2,6 +2,8 @@ import { FunnelIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import { IoRefreshSharp } from "react-icons/io5"
 
+
+
 export default function Filter() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -88,11 +90,69 @@ export default function Filter() {
 /*
 
 
-    const cleanFilters = debounce(() => {
-      dispatch(removeFilter())
-    }, 300)
+useEffect(() => {
+    const getNote = async () => {
+      try {
+        const headers = getHeaders()
+        const { bookId, noteId } = req
+        const response = await axios.get(
+          `${BACKEND_URL}/api/v1/books/${bookId}/notes/${noteId}`,
+          {
+            withCredentials: true,
+            headers: headers,
+          }
+        )
 
-    cleanFilters.cancel()
+        noteTitleElement.current.value = response.data.title
+        quillRef.current.setContents(JSON.parse(response.data.content))
+        // quillRef.current.setContents(response.data.content)
+      } catch (error) {
+        // console.log(error)
+
+        if (error.response.status === 401) {
+          navigate("/login")
+        } else if (error.response.status === 404) {
+          navigate("/not-found")
+        } else {
+          // bad-request
+          navigate("/")
+        }
+      }
+    }
+    getNote()
+  }, [])
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const title = noteTitleElement.current.value
+    const content = JSON.stringify(quillRef.current.getContents())
+
+    try {
+      const headers = getHeaders()
+      const { bookId, noteId } = req
+      const response = await axios.patch(
+        `${BACKEND_URL}/api/v1/books/${bookId}/notes/${noteId}`,
+        { title: title, content: content },
+        {
+          withCredentials: true,
+          headers: headers,
+        }
+      )
+
+      warningRef.current.innerText = ""
+
+      // noteTitleElement.current.value = response.data.title
+    } catch (error) {
+      if (error.response.status === 400) {
+        warningRef.current.innerText = "Please Provide the title"
+      } else if (error.response.status === 401) {
+        navigate("/login")
+      } else if (error.response.status === 404) {
+        navigate("/not-found")
+      }
+    }
+  }
 
 
 */
