@@ -1,26 +1,14 @@
 import {
   ArrowRightStartOnRectangleIcon,
-  Cog6ToothIcon,
+  Bars2Icon,
   UserCircleIcon,
   XMarkIcon,
-  Bars2Icon,
 } from "@heroicons/react/24/outline"
-import { useDebugValue, useState } from "react"
-import SearchFilter from "./SearchFilter"
-import { logout } from "../features/auth/authSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
 import { MdOutlineEmail } from "react-icons/md"
-
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../features/auth/authSlice"
+import SearchFilter from "./SearchFilter"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -39,7 +27,7 @@ export default function Navbar() {
   }
 
   const { user } = useSelector((state) => state.auth)
-  console.log(user)
+  // console.log(user)
 
   return (
     <>
@@ -109,11 +97,9 @@ export default function Navbar() {
                 </ul>
               </div>
             </div>
-            {/* <div className="absolute top-10 left-0 min bg-black rounded-lg mx-4 w-full h-96"></div> */}
           </div>
         </nav>
       </div>
-      {/* <Books /> */}
     </>
   )
 }
