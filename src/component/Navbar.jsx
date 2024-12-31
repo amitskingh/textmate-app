@@ -25,7 +25,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleMenuClick = () => {
-    console.log(isMenuOpen)
+    // console.log(isMenuOpen)
     setIsMenuOpen(!isMenuOpen)
   }
 
@@ -34,7 +34,7 @@ export default function Navbar() {
   const dispatch = useDispatch()
   const handleSignOut = () => {
     let response = dispatch(logout())
-    console.log(response)
+    // console.log(response)
   }
 
   return (

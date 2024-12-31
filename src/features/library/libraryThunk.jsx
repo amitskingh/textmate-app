@@ -24,7 +24,7 @@ export const addLibraryThunk = createAsyncThunk(
   "library/addLibrary",
   async (libraryName, { rejectWithValue }) => {
     try {
-      console.log(libraryName)
+      // console.log(libraryName)
 
       const response = await axiosInstance.post("/library", { libraryName })
       return response.data // Assume response contains the new library object
@@ -62,7 +62,7 @@ export const deleteLibraryThunk = createAsyncThunk(
   async (librarySlug, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(`/library/${librarySlug}`)
-      console.log(response.data)
+      // console.log(response.data)
 
       return response.data
     } catch (error) {

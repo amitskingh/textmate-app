@@ -34,7 +34,7 @@ export default function Login() {
     const email = emailRef.current.value
     const password = passwordRef.current.value
     const res = await dispatch(loginThunk({ email, password })) //resolve the promise
-    console.log(res)
+    // console.log(res)
 
     if (res.type === "auth/login/fulfilled") {
       navigate("/library")

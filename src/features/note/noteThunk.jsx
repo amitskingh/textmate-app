@@ -12,7 +12,7 @@ export const fetchNoteThunk = createAsyncThunk(
 
       return response.data
     } catch (error) {
-      console.log(error)
+      // console.log(error)
 
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch notes."
@@ -26,7 +26,7 @@ export const addNoteThunk = createAsyncThunk(
   "note/addNote",
   async ({ librarySlug, noteName }, { rejectWithValue }) => {
     try {
-      console.log(noteName)
+      // console.log(noteName)
 
       const response = await axiosInstance.post(
         `/library/${librarySlug}/note`,
@@ -69,7 +69,7 @@ export const deleteNoteThunk = createAsyncThunk(
       const response = await axiosInstance.delete(
         `/library/${librarySlug}/note/${noteSlug}`
       )
-      console.log(response.data)
+      // console.log(response.data)
 
       return response.data
     } catch (error) {

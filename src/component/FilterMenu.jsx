@@ -15,7 +15,7 @@ const FilterMenu = memo(({ resetFilter, addFilter, currFilter }) => {
 
   const handleFilter = (e) => {
     e.preventDefault()
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
 
     addFilter(e.target.name, e.target.value)
   }

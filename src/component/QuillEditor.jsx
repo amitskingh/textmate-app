@@ -31,7 +31,7 @@ function QuillEditor() {
 
   useEffect(() => {
     if (librarySlug && noteSlug) {
-      console.log("Fetching")
+      // console.log("Fetching")
 
       fetchNoteContent(librarySlug, noteSlug) // Fetch note content
     }
@@ -52,7 +52,7 @@ function QuillEditor() {
 
   const [status, setStatus] = useState("")
   useEffect(() => {
-    console.log(saveStatus)
+    // console.log(saveStatus)
     if (saveStatus === "saving") {
       setStatus("Saving...")
     } else if (saveStatus === "success") {

@@ -37,7 +37,7 @@ const useNoteContent = (debounceDelay = 2000) => {
 
         setSaveStatus("success")
       } catch (error) {
-        console.error("Error saving note:", error)
+        // console.error("Error saving note:", error)
         setSaveStatus("error")
       }
     }, debounceDelay),

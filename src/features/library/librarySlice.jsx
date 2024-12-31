@@ -52,13 +52,13 @@ const librarySlice = createSlice({
     setCurrentPage: (state, action) => {
       if (action.payload != state.pagination.currentPage) {
         state.pagination.currentPage = action.payload
-        console.log(state.pagination.currentPage)
+        // console.log(state.pagination.currentPage)
       }
     },
     setFilter: (state, action) => {
       const { key, value } = action.payload
       state.filters[key] = value
-      console.log(key, value)
+      // console.log(key, value)
     },
     removeFilter: (state, action) => {
       state.filters = {

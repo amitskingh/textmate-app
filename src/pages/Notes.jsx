@@ -74,7 +74,7 @@ export default function Note() {
   }, [dispatch, debouncedFetch, librarySlug, searchParams])
 
   const handlePageChange = (page) => {
-    console.log(page)
+    // console.log(page)
 
     dispatch(setCurrentPage(page))
     setSearchParams((prevParams) => {
@@ -165,7 +165,7 @@ export default function Note() {
     return <ErrorMessage error={status.fetch.error || "An error occurred"} />
   }
 
-  console.log(notes)
+  // console.log(notes)
 
   return (
     <>

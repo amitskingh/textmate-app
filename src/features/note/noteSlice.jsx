@@ -42,7 +42,7 @@ const noteSlice = createSlice({
     },
     setCurrentPage: (state, action) => {
       state.pagination.currentPage = action.payload
-      console.log(state.pagination)
+      // console.log(state.pagination)
     },
     setFilter: (state, action) => {
       const { key, value } = action.payload
@@ -66,12 +66,12 @@ const noteSlice = createSlice({
         state.status.fetch.loading = false
         state.notes = action.payload.data
         state.pagination = action.payload.meta.pagination
-        console.log("NOTE PAGINATION: ", action.payload.meta.pagination)
+        // console.log("NOTE PAGINATION: ", action.payload.meta.pagination)
       })
       .addCase(fetchNoteThunk.rejected, (state, action) => {
         state.status.fetch.loading = false
         state.status.fetch.error = action.payload
-        console.log(action.payload)
+        // console.log(action.payload)
       })
 
     // Add Note
