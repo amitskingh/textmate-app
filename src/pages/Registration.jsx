@@ -16,10 +16,10 @@ export default function Registration() {
     const name = nameRef.current.value
     const email = emailRef.current.value
     const password = passwordRef.current.value
-      const res = dispatch(registerThunk({ name, email, password }))
-      if (res.type === "auth/register/fulfilled") {
-        navigate("/library")
-      }
+    const res = dispatch(registerThunk({ name, email, password }))
+    if (res.type === "auth/register/fulfilled") {
+      navigate("/library")
+    }
   }
 
   return (
@@ -29,7 +29,7 @@ export default function Registration() {
           <img
             className="mx-auto h-10 w-auto"
             src="Textmate.png"
-            alt="Your Company"
+            alt="Textmate Logo"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
