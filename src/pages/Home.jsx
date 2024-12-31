@@ -64,9 +64,9 @@ function Home() {
         <h2 className="text-pretty lg:text-4xl text-gray-700 md:text-3xl md:my-5 text-2xl my-2 mb-4 leading-snug">
           Get started today and transform the way you take notes!
         </h2>
-        <div className="flex">
+        <div className="flex gap-2">
           <button className="md:px-4 md:text-xl bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white py-2 px-4 rounded shadow-md transform transition-transform duration-200 hover:scale-105">
-            <Link to="/login" className="block">
+            <Link to="/library" className="block">
               Get Started
             </Link>
           </button>

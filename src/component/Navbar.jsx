@@ -5,8 +5,10 @@ import {
   XMarkIcon,
   Bars2Icon,
 } from "@heroicons/react/24/outline"
-import { useState } from "react"
+import { useDebugValue, useState } from "react"
 import SearchFilter from "./SearchFilter"
+import { logout } from "../features/auth/authSlice"
+import { useDispatch } from "react-redux"
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -28,6 +30,12 @@ export default function Navbar() {
   }
 
   const [isSearchActive, setIsSearchActive] = useState(false)
+
+  const dispatch = useDispatch()
+  const handleSignOut = () => {
+    let response = dispatch(logout())
+    console.log(response)
+  }
 
   return (
     <>
@@ -85,12 +93,13 @@ export default function Navbar() {
                       Setting
                     </li>
                   </a>
-                  <a href="#">
-                    <li className="hover:bg-gray-200 font-semibold text-gray-800 py-2 px-4">
-                      <ArrowRightStartOnRectangleIcon className="size-6 text-blue-500 inline-block mr-1" />
-                      Sign Out
-                    </li>
-                  </a>
+                  <li
+                    onClick={handleSignOut}
+                    className="cursor-pointer hover:bg-gray-200 font-semibold text-gray-800 py-2 px-4"
+                  >
+                    <ArrowRightStartOnRectangleIcon className="size-6 text-blue-500 inline-block mr-1" />
+                    Sign Out
+                  </li>
                 </ul>
               </div>
             </div>
