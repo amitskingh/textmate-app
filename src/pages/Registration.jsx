@@ -16,7 +16,7 @@ export default function Registration() {
     const name = nameRef.current.value
     const email = emailRef.current.value
     const password = passwordRef.current.value
-    const res = dispatch(registerThunk({ name, email, password }))
+    const res = await dispatch(registerThunk({ name, email, password }))
     if (res.type === "auth/register/fulfilled") {
       navigate("/library")
     }
