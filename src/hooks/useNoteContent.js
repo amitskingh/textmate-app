@@ -3,19 +3,13 @@ import axiosInstance from "../api/axiosConfig"
 import { debounce } from "lodash"
 
 const useNoteContent = (debounceDelay = 2000) => {
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [isSaving, setIsSaving] = useState(false)
-  const [saveStatus, setSaveStatus] = useState({
-    saving: false,
-    savedStatus: null,
-    error: null,
-  })
   const [error, setError] = useState(null)
+  const [saveStatus, setSaveStatus] = useState("idle") // "idle" | "saving" | "success" | "error"
 
-  const isInitialLoad = useRef(true) // Track if the content is just loaded
-
-  const fetchNoteContent = async (librarySlug, noteSlug) => {
+  const isInitialLoad = useRef(true)
+  const fetchNoteContent = useCallback(async (librarySlug, noteSlug) => {
     setLoading(true)
     setError(null)
     try {
@@ -23,17 +17,15 @@ const useNoteContent = (debounceDelay = 2000) => {
         `/library/${librarySlug}/note/${noteSlug}`
       )
       const fetchedContent = JSON.parse(response.data.data.content)
-      setContent(fetchedContent) // Set fetched content
-      isInitialLoad.current = true // Mark as initial load
-      console.log("TEST: ", fetchNoteContent)
+      setContent(fetchedContent)
+      isInitialLoad.current = true // Mark initial load here
     } catch (error) {
-      console.log("ERROR", error)
-
+      console.error("Error fetching note:", error) // Use console.error for errors
       setError(error.response?.data?.message || "Failed to get the note.")
     } finally {
       setLoading(false)
     }
-  }
+  }, []) // Empty dependency array as it doesn't depend on any state
 
   // Debounced save function
   const saveNoteContent = useCallback(
@@ -44,45 +36,35 @@ const useNoteContent = (debounceDelay = 2000) => {
           { content: noteContent }
         )
 
-        setSaveStatus((prev) => ({
-          ...prev,
-          savedStatus: "success",
-          saving: false,
-          error: null,
-        }))
+        setSaveStatus("success")
       } catch (error) {
-        setSaveStatus((prev) => ({
-          ...prev,
-          savedStatus: "failed",
-          saving: false,
-          error: error.response?.data?.message || "Failed to save note.",
-        }))
+        console.error("Error saving note:", error)
+        setSaveStatus("error")
       }
     }, debounceDelay),
     [debounceDelay]
   )
 
-  // Handle content changes with auto-save
-  const handleContentChange = (newContent, librarySlug, noteSlug) => {
-    if (isInitialLoad.current) {
-      isInitialLoad.current = false // Skip saving on the first load
-      return
-    }
+  const handleContentChange = useCallback(
+    (newContent, librarySlug, noteSlug) => {
+      if (isInitialLoad.current) {
+        isInitialLoad.current = false
+        return
+      }
 
-    const noteContent = JSON.stringify(newContent)
+      const noteContent = JSON.stringify(newContent)
 
-    setIsSaving(true) // Indicate saving is in progress
-    setError(null) // Reset error state
+      if (noteContent === content) {
+        return
+      }
 
-    setSaveStatus((prev) => ({
-      ...prev,
-      saving: true,
-      savedStatus: null,
-      error: null,
-    }))
+      setSaveStatus("saving")
+      setContent(content)
 
-    saveNoteContent(noteContent, librarySlug, noteSlug) // Trigger auto-save
-  }
+      saveNoteContent(noteContent, librarySlug, noteSlug)
+    },
+    [saveNoteContent]
+  )
 
   // Cleanup the debounced function when the component unmounts
   useEffect(() => {
@@ -91,7 +73,6 @@ const useNoteContent = (debounceDelay = 2000) => {
 
   return {
     content,
-    isSaving,
     saveStatus,
     loading,
     error,

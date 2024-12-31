@@ -15,9 +15,18 @@ export default function Modal({
   status,
 }) {
   if (!ModalInfo?.action) {
+    document.body.style.marginRight = `0`
+    document.body.style.overflow = "auto"
     return null
-  }
+  } else {
+    let scrollWidth = window.innerWidth - document.documentElement.clientWidth
+    document.body.style.overflow = "hidden"
 
+    // ReactStrictMode sucks causing twice render so in second render scrollWidth is 0
+    if (scrollWidth != 0) {
+      document.body.style.marginRight = `${scrollWidth}px`
+    }
+  }
   const [isExiting, setIsExiting] = useState(false)
   const [warning, setWarning] = useState("")
   const [fileName, setFileName] = useState(ModalInfo.payload.fileName)

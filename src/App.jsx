@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify"
 import QuillEditor from "./component/QuillEditor"
 import Editor from "quill/core/editor"
 import ProtectedRoute from "./routes/ProtectedRoute"
+import SearchFilter from "./component/SearchFilter"
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         <QuillEditor />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "search",
+    element: <SearchFilter />,
   },
   {
     path: "*",

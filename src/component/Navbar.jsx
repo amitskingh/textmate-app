@@ -6,6 +6,7 @@ import {
   Bars2Icon,
 } from "@heroicons/react/24/outline"
 import { useState } from "react"
+import SearchFilter from "./SearchFilter"
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -26,13 +27,19 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const [isSearchActive, setIsSearchActive] = useState(false)
+
   return (
     <>
+      <SearchFilter isActive={isSearchActive} setIsActive={setIsSearchActive} />
       <div className="relative">
-        <nav className="sticky top-0 z-40 flex justify-center">
+        <nav className="sticky top-0 z-30 flex justify-center">
           <div className="md:w-[768px] relative w-full py-8 px-4 flex justify-between items-center h-12 bg-white rounded border-b-4 border-gray-100">
             <div className="flex items-center sm:w-1/2 w-2/3">
-              <div className="flex hover:text-black text-gray-500 items-center h-8 w-full px-2 hover:cursor-pointer ring-1   ring-gray-300 rounded-xl">
+              <div
+                onClick={() => setIsSearchActive(true)}
+                className="flex hover:text-black text-gray-500 items-center h-8 w-full px-2 hover:cursor-pointer ring-1   ring-gray-300 rounded-xl"
+              >
                 Search...
               </div>
             </div>

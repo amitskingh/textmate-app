@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import Editor from "./Editor"
 import { useNoteContent } from "../hooks/useNoteContent"
+import Editor from "./Editor"
 
 import { ArrowPathIcon } from "@heroicons/react/24/outline"
 
 import "quill/dist/quill.snow.css"
-import LoadingLarge from "./LoadingLarge"
 import ErrorMessage from "./ErrorMessage"
+import LoadingLarge from "./LoadingLarge"
 
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -24,7 +24,6 @@ function QuillEditor() {
   } = useNoteContent()
 
   const [range, setRange] = useState()
-  const [lastChange, setLastChange] = useState()
   const [readOnly, setReadOnly] = useState(false)
 
   // Use a ref to access the quill instance directly
@@ -32,41 +31,35 @@ function QuillEditor() {
 
   useEffect(() => {
     if (librarySlug && noteSlug) {
+      console.log("Fetching")
+
       fetchNoteContent(librarySlug, noteSlug) // Fetch note content
     }
-  }, [])
+  }, [librarySlug, noteSlug])
 
   useEffect(() => {
     if (quillRef.current && content) {
-      // Wait until Quill is initialized and content is fetched
-      const quill = quillRef.current
-
-      // Set the content in the editor
-      quill.setContents(content)
+      quillRef.current.setContents(content)
     }
-  }, [content, quillRef])
+  }, [content, quillRef, librarySlug, noteSlug])
 
-  const handleSave = useCallback(() => {
+  const debouncedSave = useCallback(() => {
     if (quillRef.current) {
       const quillContent = quillRef.current.getContents().ops
       handleContentChange(quillContent, librarySlug, noteSlug)
     }
   }, [quillRef, handleContentChange, librarySlug, noteSlug])
 
-  const [status, setStatus] = useState("Save")
-
+  const [status, setStatus] = useState("")
   useEffect(() => {
     console.log(saveStatus)
-
-    if (saveStatus.saving === true) {
+    if (saveStatus === "saving") {
       setStatus("Saving...")
-    } else if (saveStatus.savedStatus === "success") {
-      setStatus("Successfully saved")
-      setTimeout(() => {
-        setStatus("Save")
-      }, 1500)
-    } else if (saveStatus.savedStatus === "failed") {
-      setStatus("Failed saving")
+    } else if (saveStatus === "success") {
+      setStatus("Successfull Saved")
+      setTimeout(() => setStatus(""), 2000)
+    } else if (saveStatus === "error") {
+      setStatus("Error saving")
     }
   }, [saveStatus])
 
@@ -80,18 +73,31 @@ function QuillEditor() {
   return (
     <div className="max-w-[768px] mx-auto">
       <div className="px-2 mb-4">
-        <div
-          onClick={handleSave}
-          className={`px-4 pt-1 ml-1 mt-1 flex justify-center items-center cursor-pointer top-0 fixed z-50 bg-gray-50 ring-1 hover:text-blue-600 ring-gray-300`}
-        >
-          <ArrowPathIcon className="size-4 inline-block mr-1" /> {status}
+        <div className="top-0 fixed z-50 flex">
+          <button
+            onClick={debouncedSave}
+            className={`px-4 pt-1 ml-1 mt-1 flex justify-center items-center cursor-pointer bg-gray-50 ring-1 hover:text-blue-600 ring-gray-300`}
+          >
+            <ArrowPathIcon className="size-4 inline-block mr-1" /> Save
+          </button>
+          <div
+            className={`px-2 pt-1 ml-1 mt-1 flex justify-center items-center ${
+              saveStatus === "saving"
+                ? "text-blue-600"
+                : saveStatus === "success"
+                ? "text-green-600"
+                : "text-red-600"
+            } ring-gray-300`}
+          >
+            {status}
+          </div>
         </div>
 
         <Editor
           ref={quillRef}
           readOnly={readOnly}
           onSelectionChange={setRange} // Update selection range
-          onTextChange={handleSave} // Correctly handle Quill's TEXT_CHANGE event
+          onTextChange={debouncedSave} // Correctly handle Quill's TEXT_CHANGE event
         />
       </div>
     </div>
