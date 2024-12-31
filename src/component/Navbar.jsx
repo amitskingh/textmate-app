@@ -8,7 +8,8 @@ import {
 import { useDebugValue, useState } from "react"
 import SearchFilter from "./SearchFilter"
 import { logout } from "../features/auth/authSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { MdOutlineEmail } from "react-icons/md"
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -36,6 +37,9 @@ export default function Navbar() {
     let response = dispatch(logout())
     // console.log(response)
   }
+
+  const { user } = useSelector((state) => state.auth)
+  console.log(user)
 
   return (
     <>
@@ -76,8 +80,9 @@ export default function Navbar() {
                   <div className="flex justify-between items-center ">
                     <a href="#">
                       <li className="hover:bg-gray-200 font-semibold text-gray-800 py-2 px-4">
+                        {/* <UserCircleIcon className="size-6 text-blue-500 inline-flex mr-1" /> */}
                         <UserCircleIcon className="size-6 text-blue-500 inline-flex mr-1" />
-                        Your Profile
+                        {user.name}
                       </li>
                     </a>
                     <div className="hover:bg-gray-200 flex justify-center p-2 rounded-full items-center mr-2.5">
@@ -89,8 +94,9 @@ export default function Navbar() {
                   </div>
                   <a href="#">
                     <li className="hover:bg-gray-200 font-semibold text-gray-800 py-2 px-4">
-                      <Cog6ToothIcon className="size-6 text-blue-500 inline-block mr-1" />
-                      Setting
+                      {/* <Cog6ToothIcon className="size-6 text-blue-500 inline-block mr-1" /> */}
+                      <MdOutlineEmail className="size-6 text-blue-500 inline-block mr-1" />
+                      {user.email}
                     </li>
                   </a>
                   <li
