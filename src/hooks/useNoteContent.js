@@ -20,8 +20,7 @@ const useNoteContent = (debounceDelay = 2000) => {
       setContent(fetchedContent)
       isInitialLoad.current = true // Mark initial load here
     } catch (error) {
-      console.error("Error fetching note:", error) // Use console.error for errors
-      setError(error.response?.data?.message || "Failed to get the note.")
+      setError(error?.response?.data?.message || "Failed to get the note.")
     } finally {
       setLoading(false)
     }

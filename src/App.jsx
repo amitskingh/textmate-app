@@ -7,13 +7,11 @@ import Library from "./pages/Library"
 import Login from "./pages/Login"
 import Notes from "./pages/Notes"
 import Registeration from "./pages/Registration"
-import Temp from "./pages/Temp"
 
 import { ToastContainer } from "react-toastify"
 import QuillEditor from "./component/QuillEditor"
-import Editor from "quill/core/editor"
-import ProtectedRoute from "./routes/ProtectedRoute"
 import SearchFilter from "./component/SearchFilter"
+import ProtectedRoute from "./routes/ProtectedRoute"
 
 const router = createBrowserRouter([
   {

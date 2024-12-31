@@ -12,6 +12,8 @@ export const fetchNoteThunk = createAsyncThunk(
 
       return response.data
     } catch (error) {
+      console.log(error)
+
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch notes."
       )

@@ -162,9 +162,7 @@ export default function Library() {
   }
 
   if (status.fetch.error) {
-    return (
-      <ErrorMessage error={status.fetch.error.message || "An error occurred"} />
-    )
+    return <ErrorMessage error={status.fetch.error || "An error occurred"} />
   }
 
   return (

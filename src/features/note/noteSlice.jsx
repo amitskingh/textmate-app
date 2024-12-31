@@ -71,6 +71,7 @@ const noteSlice = createSlice({
       .addCase(fetchNoteThunk.rejected, (state, action) => {
         state.status.fetch.loading = false
         state.status.fetch.error = action.payload
+        console.log(action.payload)
       })
 
     // Add Note
