@@ -18,7 +18,7 @@
    OR
    VITE_API_URL=Your_Backend_Server_Link
    ```
-4. Configure the backend by following the instructions provided at [textmate-app-backend](https://github.com/amitskingh/textmate-app-backend).
+4. Configure the backend by following the instructions provided at [Textmate Backend](https://github.com/amitskingh/textmate-app-backend).
 
 ---
 
