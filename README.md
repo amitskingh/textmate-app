@@ -25,14 +25,14 @@
 ### Screenshots:
 
 1. **Home Page**  
-   ![Home Page Screenshot](public/screenshots/home.png)
+   ![Home Page Screenshot](public/screenshots/Home.png)
 2. **Login Page**  
-   ![Login Page Screenshot](public/screenshots/login.png)
+   ![Login Page Screenshot](public/screenshots/Login.png)
 3. **Library View**  
-   ![Library Screenshot](public/screenshots/library.png)
+   ![Library Screenshot](public/screenshots/Library.png)
 4. **Note View**  
-   ![Note Screenshot](public/screenshots/note.png)
+   ![Note Screenshot](public/screenshots/Note.png)
 5. **Editor**  
-   ![Editor Screenshot](public/screenshots/editor.png)
+   ![Editor Screenshot](public/screenshots/Editor.png)
 
 ---
